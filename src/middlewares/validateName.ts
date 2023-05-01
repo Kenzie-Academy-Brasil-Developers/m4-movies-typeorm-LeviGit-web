@@ -12,14 +12,16 @@ const validateName = async (
   const name = req.body.name;
   const dataRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
 
-  const movies: Movie | null = await dataRepository.findOne({
-    where: {
-      name: name,
-    },
-  });
+  if (name) {
+    const movies: Movie | null = await dataRepository.findOne({
+      where: {
+        name: name,
+      },
+    });
 
-  if (movies !== null) {
-    throw new AppError("Movie already exists.", 409);
+    if (movies !== null) {
+      throw new AppError("Movie already exists.", 409);
+    }
   }
 
   return next();

@@ -12,4 +12,6 @@ const movieSchemaReq = movieSchema.omit({ id: true });
 
 const moviesSchema = z.array(movieSchema);
 
-export { movieSchema, movieSchemaReq, moviesSchema };
+const movieSchemaPart = movieSchemaReq.partial();
+
+export { movieSchema, movieSchemaReq, moviesSchema, movieSchemaPart };
