@@ -2,10 +2,10 @@ import { z } from "zod";
 
 const movieSchema = z.object({
   id: z.number(),
-  name: z.string(),
+  name: z.string().max(50),
   description: z.string().nullable().default(null),
-  duration: z.number(),
-  price: z.number(),
+  duration: z.number().int().positive(),
+  price: z.number().int(),
 });
 
 const movieSchemaReq = movieSchema.omit({ id: true });

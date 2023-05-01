@@ -14,7 +14,12 @@ const createMovies = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const readMovies = async (req: Request, res: Response): Promise<Response> => {
-  const newData = await readAllService();
+  const sort: string | undefined = req.query.sort?.toString();
+  const order: string | undefined = req.query.order?.toString();
+  const perPage: number | undefined = Number(req.query.perPage);
+  const page: number | undefined = Number(req.query.page);
+
+  const newData = await readAllService(sort, order, perPage, page);
 
   return res.status(200).json(newData);
 };
